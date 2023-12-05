@@ -1,6 +1,6 @@
-package com.example.catalogsevice.repository;
+package com.example.catalogservice.repository;
 
-import com.example.catalogsevice.entity.Book;
+import com.example.catalogservice.entity.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

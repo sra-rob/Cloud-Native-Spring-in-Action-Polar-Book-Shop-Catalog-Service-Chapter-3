@@ -1,10 +1,8 @@
-package com.example.catalogsevice.controller;
+package com.example.catalogservice.controller;
 
-import com.example.catalogsevice.entity.Book;
-import com.example.catalogsevice.service.BookService;
+import com.example.catalogservice.entity.Book;
+import com.example.catalogservice.service.BookService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("v1/books")

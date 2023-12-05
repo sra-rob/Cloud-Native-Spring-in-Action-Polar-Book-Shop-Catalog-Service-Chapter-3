@@ -1,6 +1,6 @@
-package com.example.catalogsevice.entity.builders;
+package com.example.catalogservice.entity.builders;
 
-import com.example.catalogsevice.entity.Book;
+import com.example.catalogservice.entity.Book;
 
 public class BookBuilder {
     private static BookBuilder bookBuilder;
@@ -14,8 +14,8 @@ public class BookBuilder {
         book.setIsbn(isbn);
         return bookBuilder;
     }
-    public BookBuilder setName(String name) {
-        book.setName(name);
+    public BookBuilder setTitle(String title) {
+        book.setTitle(title);
         return bookBuilder;
     }
     public BookBuilder setAuthor(String author) {

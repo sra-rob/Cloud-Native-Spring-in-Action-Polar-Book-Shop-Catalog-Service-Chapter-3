@@ -1,24 +1,25 @@
-package com.example.catalogsevice.service;
+package com.example.catalogservice.service.impl;
 
-import com.example.catalogsevice.entity.Book;
-import com.example.catalogsevice.entity.builders.BookBuilder;
-import com.example.catalogsevice.exception.BookAlreadyExistsException;
-import com.example.catalogsevice.exception.BookNotFoundException;
-import com.example.catalogsevice.repository.BookRepository;
+import com.example.catalogservice.entity.Book;
+import com.example.catalogservice.exception.BookAlreadyExistsException;
+import com.example.catalogservice.exception.BookNotFoundException;
+import com.example.catalogservice.repository.BookRepository;
+import com.example.catalogservice.service.BookService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BookService {
+public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final ModelMapper modelMapper;
-    public BookService(BookRepository bookRepository, ModelMapper modelMapper) {
+    public BookServiceImpl(BookRepository bookRepository, ModelMapper modelMapper) {
         this.bookRepository = bookRepository;
         this.modelMapper = modelMapper;
     }
-    public Iterable<Book> viewBookList() {
+    public List<Book> viewBookList() {
         return bookRepository.findAll();
     }
     public Book viewBook(String isbn) {

@@ -1,4 +1,4 @@
-package com.example.catalogsevice.config;
+package com.example.catalogservice.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

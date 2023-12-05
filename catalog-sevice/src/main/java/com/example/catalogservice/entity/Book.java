@@ -1,4 +1,4 @@
-package com.example.catalogsevice.entity;
+package com.example.catalogservice.entity;
 
 import jakarta.persistence.*;
 
@@ -7,9 +7,18 @@ import jakarta.persistence.*;
 public class Book {
     @Id
     private String isbn;
-    private String name;
+    private String title;
     private String author;
     private Double price;
+
+    public Book() {}
+
+    public Book(String isbn, String title, String author, Double price) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.price = price;
+    }
 
     public String getIsbn() {
         return isbn;
@@ -19,12 +28,12 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getAuthor() {

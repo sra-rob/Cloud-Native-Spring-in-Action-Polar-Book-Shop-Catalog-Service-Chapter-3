@@ -1,13 +1,18 @@
 package com.example.catalogservice.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="books")
 public class Book {
     @Id
+    @NotEmpty(message = "Book isbn cannot be empty")
     private String isbn;
+    @NotEmpty(message = "Book title cannot be empty")
     private String title;
+    @NotEmpty(message = "Book author cannot be empty")
     private String author;
     private Double price;
 

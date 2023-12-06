@@ -2,14 +2,13 @@ package com.example.catalogservice.repository;
 
 import com.example.catalogservice.entity.Book;
 import com.example.catalogservice.entity.builders.BookBuilder;
-import com.fasterxml.jackson.databind.util.ArrayBuilders;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
 import java.util.List;
+import java.util.Optional;
 
 
 
@@ -18,7 +17,6 @@ import java.util.List;
 public class BookRepositoryTest {
     @Autowired
     private BookRepository bookRepository;
-
     @Test
     @DisplayName("save returns saved book")
     public void testSave_withValidArguments_returnsSavedBook() {
@@ -77,5 +75,38 @@ public class BookRepositoryTest {
         bookRepository.save(book);
         boolean bookExists = bookRepository.existsBookByIsbn("i-s-b-n-2");
         Assertions.assertThat(bookExists).isFalse();
+    }
+    @Test
+    @DisplayName("findByIsbn returns non-empty Optional<Book> when book exists")
+    public void findByIsbn_whenBookExists_returnsNonEmptyOptionalBook() {
+        Book book = BookBuilder.builder()
+                .setIsbn("i-s-b-n-1")
+                .setTitle("title1")
+                .setAuthor("author1")
+                .setPrice(11.11)
+                .build();
+        bookRepository.save(book);
+        Optional<Book> savedBook = bookRepository.findByIsbn(book.getIsbn());
+        Book unwrappedBook = savedBook.get();
+        Assertions.assertThat(unwrappedBook.getIsbn()).isEqualTo(book.getIsbn());
+    }
+    @Test
+    @DisplayName("findByIsbn returns empty Optional<Book> when book does not exist")
+    public void findByIsbn_whenBookDoesNotExists_returnsEmptyOptionalBook() {
+        Optional<Book> savedBook = bookRepository.findByIsbn("i-s-b-n-1");
+        Assertions.assertThat(savedBook.isEmpty()).isTrue();
+    }
+    @Test
+    @DisplayName("deleteByIsbn deletes book")
+    public void deleteByIsbn_whenBookExists_deletesBook() {
+        Book book = BookBuilder.builder()
+                .setIsbn("i-s-b-n-1")
+                .setTitle("title1")
+                .setAuthor("author1")
+                .setPrice(11.11)
+                .build();
+        bookRepository.save(book);
+        bookRepository.deleteByIsbn(book.getIsbn());
+        Assertions.assertThat(bookRepository.existsBookByIsbn(book.getIsbn())).isFalse();
     }
 }
